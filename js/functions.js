@@ -1,6 +1,7 @@
 //Variáveis de controle do toggle
 var showHiddenText = false;
 var showResponse = false;
+var showSidebar = false;
 
 //Função que mostra os textos do resumo
 function showText(){
@@ -71,6 +72,31 @@ function showResponses(){
         hiddenMessages.style.display = 'none'
     }
 }
+
+//Adiciona um eventListener que monitora o resize da janela
+//(para evitar bugs no sidebar)
+
+window.addEventListener('resize',()=>{
+    if(window.innerWidth > 800){
+        let sidebar = document.querySelector('.sidebar');
+        sidebar.style.left = '0'
+    }
+})
+
+//Função responsável por fazer o toggle do sidebar
+
+function triggerHandler(){
+    let sidebar = document.querySelector('.sidebar');
+    showSidebar = !showSidebar
+    
+    if(showSidebar === true){
+        sidebar.style.left = '0'
+        console.log(window.innerWidth)
+    }else if(showSidebar === false){
+        sidebar.style.left = '-220px'
+    }
+}
+
 //Criação da instância do editor de texto
 var editor = new Quill('.text-editor', {
     modules: {
